@@ -1,6 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="nations">
-  <mat-card *ngFor="let nation of nations" class="nation-card">
-          <mat-card-title>{{nation.alpha3Code}}</mat-card-title>
-          <img mat-card-img [src]="nation.flag" alt="" draggable="false" class="image">
-  </mat-card>
-</div>
+<mat-nav-list fxLayout="row" fxLayoutAlign="start center" class="nation-list">
+  <a mat-list-item class="nation-list-item" *ngFor="let nation of nations" routerLink="/home/{{nation?.alpha3Code}}" routerLinkActive="router-link-active" >
+    <div class="nation-list-div" fxLayout="column">
+      <div>{{nation.alpha3Code}}</div>
+      <img [src]="nation.flag" alt="" draggable="false" class="image">
+    </div>
+  </a>
+</mat-nav-list>
