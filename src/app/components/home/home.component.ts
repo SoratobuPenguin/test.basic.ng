@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Nation } from '../../model/nation';
-import { Router, ActivatedRoute, ɵangular_packages_router_router_b } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit, OnDestroy
 {
     nations: Nation[];
     selectedNation: Nation;
-    id: string;
 
     constructor(
         private router: Router,
@@ -39,13 +38,6 @@ export class HomeComponent implements OnInit, OnDestroy
                 flag: "",
                 latlng: []
             };
-            //id from angular router
-            let nullableID = this.route.snapshot.paramMap.get('id');
-            this.id = "";
-            if (nullableID != null){
-                this.id = nullableID
-            }
-            console.log("id: "+this.id);
         }
 
     ngOnInit(): void {
@@ -54,26 +46,39 @@ export class HomeComponent implements OnInit, OnDestroy
             .subscribe( (nations:Nation[]) => {
                 this.nations = nations ? nations : [];
                 this.changeDetectorRef.detectChanges();
-                if (this.id.toLocaleUpperCase() != this.id){
-                    console.log("/home/"+this.id.toLocaleUpperCase());
-                    this.router.navigate(["/home/"+this.id.toLocaleUpperCase()]);
-                }else{
-                    console.log(this.nations);
-                    let nullableNation = this.nations.find(x => x.alpha3Code == this.id);
-                    console.log(nullableNation);
-                    if (nullableNation != null){
-                        this.selectedNation = {
-                            name: nullableNation.name,
-                            nativeName: nullableNation.nativeName,
-                            alpha2Code: nullableNation.alpha2Code,
-                            alpha3Code: nullableNation.alpha3Code,
-                            capital: nullableNation.capital,
-                            flag: nullableNation.flag,
-                            latlng: nullableNation.latlng
-                          };
-                    }
-                }
+                this.getSelectedNationAndID();
             } );
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.getSelectedNationAndID();
+            }
+        });
+    }
+
+    getSelectedNationAndID(): void {
+        //id from angular router
+        let id = this.route.snapshot.paramMap.get('id');
+        if (id != null){
+            //reroute non-uppercase id's
+            if (id.toLocaleUpperCase() != id){
+                this.router.navigate(["/home/"+id.toLocaleUpperCase()]);//.then(() => window.location.reload());
+            }else{
+                //find nation of id
+                let nullableNation = this.nations.find(x => x.alpha3Code == id);
+                if (nullableNation != null){
+                    this.selectedNation = {
+                        name: nullableNation.name,
+                        nativeName: nullableNation.nativeName,
+                        alpha2Code: nullableNation.alpha2Code,
+                        alpha3Code: nullableNation.alpha3Code,
+                        capital: nullableNation.capital,
+                        flag: nullableNation.flag,
+                        latlng: nullableNation.latlng
+                        };
+                }
+            }
+        }
+        
     }
 
     ngOnDestroy(): void {
