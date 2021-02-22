@@ -1,7 +1,7 @@
-
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Nation } from '../model/nation';
+
+import { Nation } from '../../model/nation';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { Nation } from '../model/nation';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit,OnDestroy
+export class HomeComponent implements OnInit, OnDestroy
 {
     nations: Nation[] = [];
     hilitedName = '...';

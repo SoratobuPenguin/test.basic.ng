@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="start center" class="nations">
+  <mat-card *ngFor="let nation of nations" class="nation-card">
+          <mat-card-title>{{nation.alpha3Code}}</mat-card-title>
+          <img mat-card-img [src]="nation.flag" alt="" draggable="false" class="image">
+  </mat-card>
+</div>
