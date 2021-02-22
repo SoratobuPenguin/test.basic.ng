@@ -12,6 +12,7 @@ import { MaterialModule } from './modules/material.module';
 
 import { HomeComponent } from './components/home/home.component';
 import { NationNavBarComponent } from './components/nation-nav-bar/nation-nav-bar.component';
+import { InfoComponent } from './components/info/info.component';
 
 const app_routes: Routes = [
   {
@@ -36,6 +37,7 @@ const app_routes: Routes = [
     AppComponent,
     HomeComponent,
     NationNavBarComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

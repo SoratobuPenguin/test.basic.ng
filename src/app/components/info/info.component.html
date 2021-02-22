@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-between start" class=info>
+  <div class="active">
+      <div>Name: {{selectedNation.name}}</div>
+      <div>Native Name: {{selectedNation.nativeName}}</div>
+      <div>Capital: {{selectedNation.capital}}</div>
+      <div>Latitude: {{selectedNation.latlng[0]}}</div>
+      <div>Longitude: {{selectedNation.latlng[1]}}</div>
+  </div>
+  <div>
+      <img #flag style="border:1px dashed blue;width:320px;height:240px;">
+  </div>
+</div>

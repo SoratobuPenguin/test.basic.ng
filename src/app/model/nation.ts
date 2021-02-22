@@ -7,6 +7,5 @@ export interface Nation
     alpha3Code: string;
     capital: string;
     flag: string;
-    latitude: number;
-    longitude: number;
+    latlng: number[];
 }

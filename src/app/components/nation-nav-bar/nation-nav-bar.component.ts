@@ -1,33 +1,30 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Nation } from '../../model/nation';
-
-interface NavItem {
-  link: string;
-}
 
 @Component({
   selector: 'app-nation-nav-bar',
   templateUrl: './nation-nav-bar.component.html',
-  styleUrls: ['./nation-nav-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./nation-nav-bar.component.scss']
 })
 export class NationNavBarComponent implements OnInit {
-  nations: Nation[] = [];
+  @Input() nations:Nation[];
 
-  constructor(
-    private http:HttpClient,
-    private changeDetectorRef:ChangeDetectorRef ) {}
+  constructor() {
+      this.nations = [{
+        name: "",
+        nativeName: "",
+        alpha2Code: "",
+        alpha3Code: "",
+        capital: "",
+        flag: "",
+        latlng: []
+      }];
+    }
   
 
   ngOnInit(): void {
-    this.http.get<Nation[]>( 'assets/data.json' )
-        .pipe()
-        .subscribe( (nations:Nation[]) => {
-            this.nations = nations ? nations : [];
-            this.changeDetectorRef.detectChanges();
-        } );
+
   }
   
 }
