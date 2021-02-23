@@ -1,0 +1,19 @@
+@mixin theme-picker-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $white: map-get($theme, white);
+  $black: map-get($theme, black);
+
+  //.theme-picker-component-wrapper {
+  //}
+  /*.slider-margin {
+    color: mat-color($accent, darker);
+  }*/
+  .mat-icon-black{
+    color: mat-color($black, lighter);
+  }
+  .mat-icon-white{
+    color: mat-color($accent, darker);
+  }
+}

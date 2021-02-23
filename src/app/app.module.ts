@@ -11,10 +11,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
 //Services
 import { SideNavService } from './services/side-nav.service';
+import { ThemePickerService } from './services/theme-picker.service';
 //Components
 import { HomeComponent } from './components/home/home.component';
 import { NationNavBarComponent } from './components/nation-nav-bar/nation-nav-bar.component';
 import { InfoComponent } from './components/info/info.component';
+import { ThemePickerComponent } from './components/theme-picker/theme-picker.component';
 
 const app_routes: Routes = [
   {
@@ -39,7 +41,8 @@ const app_routes: Routes = [
     AppComponent,
     HomeComponent,
     NationNavBarComponent,
-    InfoComponent
+    InfoComponent,
+    ThemePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,10 @@ const app_routes: Routes = [
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [SideNavService],
+  providers: [
+    SideNavService,
+    ThemePickerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

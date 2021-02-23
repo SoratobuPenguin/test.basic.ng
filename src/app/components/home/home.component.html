@@ -3,8 +3,12 @@
         <app-nation-nav-bar [nations]="nations"></app-nation-nav-bar>
     </mat-sidenav>
     <mat-sidenav-content class="main-content" [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
-        <div style="padding: 20px">
-        <app-info #info [selectedNation]="selectedNation"></app-info>
+        <div>
+            <mat-toolbar class="top-bar-shadow" color="primary">
+                <span class="top-bar-spacer"></span>
+                <span class="vert-center"><app-theme-picker></app-theme-picker></span>
+            </mat-toolbar>
+            <app-info #info [selectedNation]="selectedNation"></app-info>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -10,3 +10,13 @@
   .side-nav-shadow{
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   }
+
+  .top-bar-shadow{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    position: relative;
+    z-index: 10;
+  }
+
+  .top-bar-spacer {
+    flex: 1 1 auto;
+  }
