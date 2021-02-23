@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 
 import { Nation } from '../../model/nation';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { InfoComponent } from '../info/info.component';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 })
 export class HomeComponent implements OnInit, OnDestroy
 {
+    @ViewChild('info', {static: false}) info?: InfoComponent;
     nations: Nation[];
     selectedNation: Nation;
 
@@ -46,16 +48,17 @@ export class HomeComponent implements OnInit, OnDestroy
             .subscribe( (nations:Nation[]) => {
                 this.nations = nations ? nations : [];
                 this.changeDetectorRef.detectChanges();
-                this.getSelectedNationAndID();
+                this.getSelectedNationAndResetFlagAni();
             } );
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                this.getSelectedNationAndID();
+                this.getSelectedNationAndResetFlagAni();
+                
             }
         });
     }
 
-    getSelectedNationAndID(): void {
+    getSelectedNationAndResetFlagAni(): void {
         //id from angular router
         let id = this.route.snapshot.paramMap.get('id');
         if (id != null){
@@ -77,6 +80,10 @@ export class HomeComponent implements OnInit, OnDestroy
                         };
                 }
             }
+        }
+        console.log(this.info);
+        if (this.info != null){
+            this.info.ResetFlagFade();
         }
         
     }

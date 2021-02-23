@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { FlexAlignDirective } from '@angular/flex-layout';
 
 import { Nation } from '../../model/nation';
 
@@ -9,6 +10,7 @@ import { Nation } from '../../model/nation';
 })
 export class InfoComponent implements OnInit {
   @Input() selectedNation:Nation;
+  @ViewChild('flag', {static: false}) flag?: ElementRef;
 
   constructor() {
     this.selectedNation = {
@@ -23,6 +25,17 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  public ResetFlagFade(): void{
+    if (this.flag != null){
+      this.flag.nativeElement.classList.remove("animated");
+      this.flag.nativeElement.classList.remove("fadeIn");
+      this.flag.nativeElement.width = this.flag.nativeElement.width; //needed to restart css classes
+      this.flag.nativeElement.classList.add("animated");
+      this.flag.nativeElement.classList.add("fadeIn");
+    }
   }
 
 }
