@@ -1,6 +1,5 @@
 import { trigger, state, style, transition, animate, animateChild, query } from '@angular/animations';
 
-
 export const onSideNavChange = trigger('onSideNavChange', [
   state('close',
     style({
@@ -15,21 +14,6 @@ export const onSideNavChange = trigger('onSideNavChange', [
   transition('close => open', animate('250ms ease-in')),
   transition('open => close', animate('250ms ease-in')),
 ]);
-
-/*export const onFlagChange = trigger('onSideNavChange', [
-  state('close',
-    style({
-      'min-width': '192px'
-    })
-  ),
-  state('open',
-    style({
-      'min-width': '500px'
-    })
-  ),
-  transition('close => open', animate('250ms ease-in')),
-  transition('open => close', animate('250ms ease-in')),
-]); */
 
 export const onMainContentChange = trigger('onMainContentChange', [
   state('close',
@@ -46,20 +30,19 @@ export const onMainContentChange = trigger('onMainContentChange', [
   transition('open => close', animate('250ms ease-in')),
 ]);
 
-
 export const animateText = trigger('animateText', [
   state('hide',
     style({
-      'display': 'none',
+      'display': 'None',
       opacity: 0,
     })
   ),
   state('show',
     style({
-      'display': 'block',
+      'display': 'flex',
       opacity: 1,
     })
   ),
   transition('close => open', animate('350ms ease-in')),
   transition('open => close', animate('200ms ease-out')),
-]);
+]);/**/
