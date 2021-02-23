@@ -1,4 +1,3 @@
-
 export interface Nation
 {
     name: string;
