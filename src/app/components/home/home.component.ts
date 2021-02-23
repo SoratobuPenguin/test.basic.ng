@@ -81,7 +81,6 @@ export class HomeComponent implements OnInit, OnDestroy
                 }
             }
         }
-        console.log(this.info);
         if (this.info != null){
             this.info.ResetFlagFade();
         }
