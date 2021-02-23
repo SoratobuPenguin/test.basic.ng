@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { onMainContentChange } from '../../animations/animations';
 import { SideNavService } from '../../services/side-nav.service';
 import { InfoComponent } from '../info/info.component';
+import { NationService } from '../../services/nation.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy
         private route: ActivatedRoute,
         private http:HttpClient,
         private changeDetectorRef:ChangeDetectorRef,
+        private _nationService : NationService,
         private _sideNavService: SideNavService ) {
             //defaults
             this.nations = [{
@@ -48,19 +50,24 @@ export class HomeComponent implements OnInit, OnDestroy
             };
             this._sideNavService.sideNavState$.subscribe( res => {
               this.onSideNavChange = res;
-            })
+            });
+            this._nationService.getNations().subscribe((nats:Nation[]) =>{
+                this.nations = nats;
+                this.changeDetectorRef.detectChanges();
+                this.getSelectedNationAndResetFlagAni();
+            });
             //Proper values through ngOnInit()
         }
 
     ngOnInit(): void {
         //Http subs
-        this.http.get<Nation[]>( 'assets/data.json' )
+        /*this.http.get<Nation[]>( 'assets/data.json' )
             .pipe()
             .subscribe( (nations:Nation[]) => {
                 this.nations = nations ? nations : [];
                 this.changeDetectorRef.detectChanges();
                 this.getSelectedNationAndResetFlagAni();
-            } );
+            } ); */
         //Router subs
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {

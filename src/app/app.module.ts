@@ -12,6 +12,7 @@ import { MaterialModule } from './modules/material.module';
 //Services
 import { SideNavService } from './services/side-nav.service';
 import { ThemePickerService } from './services/theme-picker.service';
+import { NationService } from './services/nation.service';
 //Components
 import { HomeComponent } from './components/home/home.component';
 import { NationNavBarComponent } from './components/nation-nav-bar/nation-nav-bar.component';
@@ -57,7 +58,8 @@ const app_routes: Routes = [
   ],
   providers: [
     SideNavService,
-    ThemePickerService
+    ThemePickerService,
+    NationService
   ],
   bootstrap: [AppComponent]
 })
