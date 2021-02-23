@@ -7,9 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
+//Modules
 import { MaterialModule } from './modules/material.module';
-
+//Services
+import { SideNavService } from './services/side-nav.service';
+//Components
 import { HomeComponent } from './components/home/home.component';
 import { NationNavBarComponent } from './components/nation-nav-bar/nation-nav-bar.component';
 import { InfoComponent } from './components/info/info.component';
@@ -50,7 +52,7 @@ const app_routes: Routes = [
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [SideNavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

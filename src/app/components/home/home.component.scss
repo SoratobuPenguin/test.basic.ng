@@ -1,0 +1,17 @@
+.main-content {
+    width: 100%; 
+    //background: #efefef;
+  }
+  
+  .mat-drawer {
+    //background-color: grey;
+  }
+  
+  .mat-drawer-container {
+    height: calc(100vh);
+    display: flex;
+  }
+  
+  .side-nav-shadow{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  }

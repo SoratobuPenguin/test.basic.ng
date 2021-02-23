@@ -10,9 +10,10 @@ import { Nation } from '../../model/nation';
 })
 export class InfoComponent implements OnInit {
   @Input() selectedNation:Nation;
-  @ViewChild('flag', {static: false}) flag?: ElementRef;
+  @ViewChild('flag', {static: false}) flag?: ElementRef; //Flag img html element
 
   constructor() {
+    //defaults
     this.selectedNation = {
       name: "",
       nativeName: "",
@@ -22,6 +23,7 @@ export class InfoComponent implements OnInit {
       flag: "",
       latlng: []
     };
+    //Proper values through @Input()
   }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class InfoComponent implements OnInit {
 
   public ResetFlagFade(): void{
     if (this.flag != null){
+      //Remove and Re-add animation css
       this.flag.nativeElement.classList.remove("animated");
       this.flag.nativeElement.classList.remove("fadeIn");
       this.flag.nativeElement.width = this.flag.nativeElement.width; //needed to restart css classes

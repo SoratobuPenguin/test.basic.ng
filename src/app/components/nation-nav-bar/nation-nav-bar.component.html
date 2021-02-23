@@ -1,8 +1,19 @@
-<mat-nav-list fxLayout="row" fxLayoutAlign="start center" class="nation-list">
-  <a mat-list-item class="nation-list-item" *ngFor="let nation of nations" routerLink="/home/{{nation?.alpha3Code}}" routerLinkActive="router-link-active" >
-    <div class="nation-list-div" fxLayout="column">
-      <div>{{nation.alpha3Code}}</div>
-      <img [src]="nation.flag" alt="" draggable="false" class="image">
-    </div>
-  </a>
-</mat-nav-list>
+<div class="sidenav-container"  [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+  <div fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
+    <mat-nav-list class="nation-list">
+      <a mat-list-item class="sidenav-item" class="nation-list-item" *ngFor="let nation of nations" routerLink="/home/{{nation?.alpha3Code}}" routerLinkActive="router-link-active" >
+        <img [src]="nation.flag" alt="" draggable="false" class="image">
+        <span [@animateText]="fullText ? 'hide' : 'show'">{{ nation?.alpha3Code }} </span>
+        <span [@animateText]="fullText ? 'show' : 'hide'">{{ nation?.name }} </span>
+      </a>
+    </mat-nav-list>
+  </div>
+
+  <span class="spacer"></span>
+  <div fxLayout="row" fxLayoutAlign="end center" style="padding: 0px 10px;">
+    <button mat-icon-button (click)="sideNavToggle()">
+      <mat-icon *ngIf="sideNavState">arrow_left</mat-icon>
+      <mat-icon *ngIf="!sideNavState">arrow_right</mat-icon>
+    </button>
+  </div>
+</div>

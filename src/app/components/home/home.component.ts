@@ -3,25 +3,31 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, OnDes
 
 import { Nation } from '../../model/nation';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { onMainContentChange } from '../../animations/animations';
+import { SideNavService } from '../../services/side-nav.service';
 import { InfoComponent } from '../info/info.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [onMainContentChange]
 })
 export class HomeComponent implements OnInit, OnDestroy
 {
-    @ViewChild('info', {static: false}) info?: InfoComponent;
+    @ViewChild('info', {static: false}) info?: InfoComponent; //Information block for nations
     nations: Nation[];
     selectedNation: Nation;
+    public onSideNavChange?: boolean;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private http:HttpClient,
-        private changeDetectorRef:ChangeDetectorRef ) {
+        private changeDetectorRef:ChangeDetectorRef,
+        private _sideNavService: SideNavService ) {
+            //defaults
             this.nations = [{
                 name: "",
                 nativeName: "",
@@ -40,9 +46,14 @@ export class HomeComponent implements OnInit, OnDestroy
                 flag: "",
                 latlng: []
             };
+            this._sideNavService.sideNavState$.subscribe( res => {
+              this.onSideNavChange = res;
+            })
+            //Proper values through ngOnInit()
         }
 
     ngOnInit(): void {
+        //Http subs
         this.http.get<Nation[]>( 'assets/data.json' )
             .pipe()
             .subscribe( (nations:Nation[]) => {
@@ -50,6 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy
                 this.changeDetectorRef.detectChanges();
                 this.getSelectedNationAndResetFlagAni();
             } );
+        //Router subs
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.getSelectedNationAndResetFlagAni();
@@ -81,10 +93,10 @@ export class HomeComponent implements OnInit, OnDestroy
                 }
             }
         }
+        //Reset Animations
         if (this.info != null){
             this.info.ResetFlagFade();
         }
-        
     }
 
     ngOnDestroy(): void {
