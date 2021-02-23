@@ -37,7 +37,7 @@ const app_routes: Routes = [
     AppComponent,
     HomeComponent,
     NationNavBarComponent,
-    InfoComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
